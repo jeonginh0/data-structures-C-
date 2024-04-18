@@ -1,0 +1,5 @@
+{
+    "sketch": "stone.ino",
+    "board": "arduino:avr:uno",
+    "output": "../build"
+}
