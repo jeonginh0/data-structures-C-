@@ -5,7 +5,7 @@
 
 #include "../CookHeader.h"
 
-Array <string> katok;
+Array <Array <string>> katok;
 
 int sel_num = -1;
 
