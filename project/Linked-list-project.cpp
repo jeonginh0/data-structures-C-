@@ -1,24 +1,24 @@
-// connect-list project
-// 단순연결리스트 응용문제 01를 리팩토링한 코드 
-// 이 프로그램은 총 5개의 정보(이름, 이메일)를 사용자로부터 입력받아 정보를 출력하고 변경할 수 있는 프로그램입니다.
+// linked-list project
+// 단순연결리스트 응용문제 중 1번문제를 리팩토링한 코드 
+// 이 프로그램은 총 5개의 정보(이름, 이메일)를 사용자로부터 입력받아 이메일 순서대로 정보를 출력하고 변경할 수 있는 프로그램입니다.
 
 #include "../CookHeader.h"
 
 typedef struct _Node {
     string data[2]; // 이름, 이메일
     struct _Node* link = NULL;
-} Node2;
+} Node;
 
-Array <Node2*> memory;
-Node2* head, *current, *pre;
+Array <Node*> memory;
+Node* head, *current, *pre;
 int inputCount = 0; // 입력 받은 정보의 개수를 저장하는 변수
 
 
-void printNodes2(Node2* start) {
+void printNodes(Node* start) {
     if(start == NULL) {
         return;
     }
-    Node2* current = start;
+    Node* current = start;
     print("[" + current -> data[0] + "," + current -> data[1] + "]");
     while (current -> link != NULL) {
         current = current -> link;
@@ -34,8 +34,8 @@ void freeMemory() {
 }
 
 void makeSimpleLinkedList(Array <string> nameEmail) {
-    Node2* node;
-    node = new Node2;
+    Node* node;
+    node = new Node;
     node -> data[0] = nameEmail[0];
     node -> data[1] = nameEmail[1];
     memory.push_back(node);
@@ -69,7 +69,7 @@ void updateNode(int position, string newName, string newEmail) {
         return;
     }
 
-    Node2* current = head;
+    Node* current = head;
     for (int i = 1; i < position; i++) {
         current = current->link;
     }
@@ -97,7 +97,7 @@ int main() {
         // 5개의 정보를 입력받은 후 추가적인 입력은 불가능
         println(" ");
         println("<--입력된 정보 목록 출력-->");
-        printNodes2(head);
+        printNodes(head);
         println(" ");
 
         string userInput;// 사용자가 x, X를 입력할 수 있도록 문자열 변수 userInput 선언. if-else 문 내부에서 update를 위한 변수 형변환 예정.
@@ -105,7 +105,7 @@ int main() {
 
         if (userInput == "x" || userInput == "X") {
             println("<--입력된 정보 목록 출력-->");
-            printNodes2(head);
+            printNodes(head);
 
             println("프로그램을 종료합니다.");
             break;
@@ -121,14 +121,14 @@ int main() {
 
                 println("<--수정된 정보 목록 출력-->");
                 updateNode(position, newName, newEmail);
-                printNodes2(head);
+                printNodes(head);
 
             } else {
                 println("잘못된 위치입니다. 수정을 종료합니다.");
                 println(" ");
 
                 println("<--입력된 정보 목록 출력-->");
-                printNodes2(head);
+                printNodes(head);
             }  
         }
         println(" ");
