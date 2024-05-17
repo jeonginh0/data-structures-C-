@@ -20,11 +20,11 @@ Graph initGraph(int size) {
     return G;
 }
 
-Array <string> nameAry = {"문별", "솔라", "휘인", "쯔위", "선미", "화사"};
+Array <string> nameAry = {"문별", "솔라", "쯔위", "휘인", "선미", "화사"};
 int 문별 = 0; 
 int 솔라 = 1; 
-int 휘인 = 2; 
-int 쯔위 = 3; 
+int 쯔위 = 2; 
+int 휘인 = 3; 
 int 선미 = 4;
 int 화사 = 5;
 
