@@ -4,25 +4,29 @@
 
 #include "../CookHeader.h"
 
-typedef struct _Node {
-    string data[2]; // 이름, 이메일
-    struct _Node* link = NULL;
+typedef struct _Node { // 구조체 선언
+    string data[2]; // 이름, 이메일을 받는 문자형 변수
+    struct _Node* link = NULL; // 노드간 연결을 위한 link 포인터 _Node형 변수
 } Node;
 
-Array <Node*> memory;
-Node* head, *current, *pre;
+Array <Node*> memory; // 구조체 포인터 배열 메모리 선언
+Node* head, *current, *pre; // 구조체 포인터형 head, current(현재), pre(이전) 변수 선언
 int inputCount = 0; // 입력 받은 정보의 개수를 저장하는 변수
 
 
 void printNodes(Node* start) {
+
+    // 시작 노드가 NULL이면 함수 종료
     if(start == NULL) {
         return;
     }
-    Node* current = start;
+    Node* current = start; // 현재 노드를 시작 노드로 지정.
+
+    // 시작 노드부터 시작해서 연결된 모든 노드의 데이터를 출력
     print("[" + current -> data[0] + "," + current -> data[1] + "]");
-    while (current -> link != NULL) {
-        current = current -> link;
-        print("[" + current -> data[0] + "," + current -> data[1] + "]");
+    while (current -> link != NULL) { //while 루프는 현재 노드의 link가 NULL이 아닐동안에만 반복
+        current = current -> link; // 다음 노드로 이동
+        print("[" + current -> data[0] + "," + current -> data[1] + "]"); // 다음 노드로 이동 후 해당 노드의 데이터를 출력.
     }
     println("");
 }
@@ -35,10 +39,10 @@ void freeMemory() {
 
 void makeSimpleLinkedList(Array <string> nameEmail) {
     Node* node;
-    node = new Node;
-    node -> data[0] = nameEmail[0];
-    node -> data[1] = nameEmail[1];
-    memory.push_back(node);
+    node = new Node; // 새로운 노드 생성
+    node -> data[0] = nameEmail[0]; // 이름 저장
+    node -> data[1] = nameEmail[1]; // 이메일 저장
+    memory.push_back(node); // 생성된 노드를 메모리에 추가
     if(head == NULL) { // 첫 번째 노드일 때
         head = node;
         return;
@@ -49,13 +53,13 @@ void makeSimpleLinkedList(Array <string> nameEmail) {
         return;
     }
 
-    current = head;                     // 중간 모드로 삽입하는 경우
-    while (current -> link != NULL) {
-        pre = current;
-        current = current -> link;
-        if(current->data[0] > nameEmail[0]) {
-            pre -> link = node;
-            node -> link = current;
+    current = head;                     // 중간으로 삽입하는 경우
+    while (current -> link != NULL) { // 다음 노드가 NULL이 아닐때 까지 반복
+        pre = current; // 현재 노드를 이전 노드로 설정
+        current = current -> link; // 현재 노드는 다음 노드로 설정
+        if(current->data[0] > nameEmail[0]) { // 현재 노드의 이름이 새로 삽입하려는 노드의 이름보다 큰 경우
+            pre -> link = node; // 이전 노드와 새로운 노드를 연결 
+            node -> link = current; // 새로운 노드와 현재 노드를 연결
             return;
         }
     }
@@ -64,16 +68,17 @@ void makeSimpleLinkedList(Array <string> nameEmail) {
 }
 
 void updateNode(int position, string newName, string newEmail) {
-    if (position < 1 || position > len(memory)) {
+    if (position < 1 || position > len(memory)) { // position이 1보다 작거나 리스트의 길이보다 크다면 종료.
         println("잘못된 위치입니다.");
         return;
     }
 
     Node* current = head;
-    for (int i = 1; i < position; i++) {
+    for (int i = 1; i < position; i++) { // 위치가 유효한 경우 업데이트할 노드를 찾기위해 순회진행
         current = current->link;
     }
 
+    // 위치를 찾은 후, 함수는 해당 노드의 데이터를 새로운 이름 newName, 새로운 이메일 newEmail로 업데이트.
     current->data[0] = newName;
     current->data[1] = newEmail;
 }
