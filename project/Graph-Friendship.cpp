@@ -32,7 +32,7 @@ int getIndex(string name) {
             return i;
         }
     }
-    return -1; // 찾지 못한 경우
+    return -1; // 찾지 못한 경우 
 }
 
 // 그래프 출력 함수
