@@ -64,3 +64,12 @@ Array <Array <int>> emptyArray2(int row, int col) {
 	}
 	return ary2;
 }
+
+Array<int> randomArray(int size, int start, int end) {
+    randomInit(start, end);
+    Array<int> ary(size);
+    for (int i = 0; i < size; i++) {
+        ary[i] = cookRandom(gen);
+    }
+    return ary;
+}
